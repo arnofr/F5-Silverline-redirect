@@ -55,7 +55,7 @@ app.controller('MainCtrl', ['$scope', '$mdToast','$http','$interval','$mdDialog'
     );
   };
 
-  //md-dialog to push to apm
+  //md-dialog to push to silverline
     $scope.showConfirmpush = function(ev) {
 
       var confirm = $mdDialog.confirm()
@@ -94,4 +94,43 @@ app.controller('MainCtrl', ['$scope', '$mdToast','$http','$interval','$mdDialog'
     }; //end confirm push
     //end md-dialog
 
+
+    //md-dialog to push to silverline
+      $scope.showConfirmpushpremise = function(ev) {
+
+        var confirm = $mdDialog.confirm()
+              .title('Enable GTM Service')
+              .textContent('This will redirect traffic Back On Premise')
+              .ariaLabel('Redirect')
+              .targetEvent(ev)
+              .ok("Let's do it!")
+              .cancel('Cancel');
+          $mdDialog.show(confirm).then(function() {
+              //if confirm
+              $scope.progressbar=false;
+
+              return $http.get('/redirecttopremise').then(function(data){
+                if (data.data != "{KO}") {
+                  /*angular.copy(data.data.records,nl.networklocations);*/
+                  showSimpleToast('top right',"Redirect Done");
+                  $scope.serveravailable();
+                } else {
+                  //something bad happened
+                  //get working but error code back KO
+                    showSimpleToast('top right',"Cannot redirect");
+                }
+              }, function(data){
+                  // get no working ?
+                  showSimpleToast('top right',"Cannot Redirect");
+              });
+
+
+
+                $scope.progressbar=true;
+
+          }, function() {
+              //do nothing on cancel
+            });
+      }; //end confirm push
+      //end md-dialog
 }]); //end controller MainCtrl

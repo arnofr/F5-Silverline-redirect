@@ -68,7 +68,11 @@
               </tr>
               <tr md-row  >
                  <td md-cell>
-                   <span class="md-subhead" ng-hide="isserveravailable"> F5 <span class="md-subhead" style="color:blue">Silverline</span> Activated</span>  
+                   <span class="md-subhead" ng-hide="isserveravailable">
+                      F5 <span class="md-subhead" style="color:blue">Silverline</span> Activated<br>
+                      <md-button  aria-label="Redirect on Premise" class="md-primary" ng-click="showConfirmpushpremise($event)"><img src="/images/Return-icon.jpg"></md-button>
+
+                   </span>
                    <md-button ng-show="isserveravailable" aria-label="Redirect to Silverline" class="md-primary" ng-click="showConfirmpush($event)"><img src="/images/redbutton.jpg"></md-button></td>
                  <td md-cell></td>
                </tr>
